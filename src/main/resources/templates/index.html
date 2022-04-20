@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Home</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles"></th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<h1>Home</h1>
+		<br>
+		<p>
+			Bienvenido <span sec:authentication="principal.username">Usuario</span>
+		</p>
+		<div sec:authorize="hasAuthority('ADMIN_ROLE')">
+			Contenido sólo para administradores.
+			<div class="form-group">
+				<span><a href="/" th:href="@{/registro}">Registrar nuevo
+						usuario aquí</a></span>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

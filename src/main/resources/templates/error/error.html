@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>403 Forbidden</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<style>
+body {
+	background-color: linen;
+}
+
+.containerMedio {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10vw;
+	font-weight: bold;
+	text-align: center;
+	color: #660000;
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
+.containerInferior {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2vw;
+	font-weight: bold;
+	text-align: center;
+	color: #660000;
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
+.info-adicional {
+ 	padding: 3px 3px 3px 0px;
+}
+</style>
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="containerMedio">Error</div>
+	<div class="containerInferior">Algo salio mal.</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="alert alert-danger mt-5" role="alert" th:if="${error}">
+					<div th:utext="${error.customizedMessage}"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<div class="alert alert-danger mt-5" role="alert"
+					th:unless="${error}">Hubo un error</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

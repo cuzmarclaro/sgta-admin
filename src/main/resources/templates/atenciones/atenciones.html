@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Atenciones</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<h1>Lista de Atenciones</h1>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/atenciones/nuevo}"
+					class="btn btn-primary btn-sm mb-3">Agregar Atención</a>
+			</div>
+		</div>
+
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Turno</th>
+					<th>Estado</th>
+					<th>Rut Cliente</th>
+					<th>Cliente</th>
+					<th>Correo</th>
+					<th>Tipo Atención</th>
+					<th>Registro Atención</th>
+					<th>Llamadas</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="atencion: ${atenciones}">
+					<td th:text="${atencion.turno.getTurnoAtencion()}"></td>
+					<div th:switch="${atencion.turno.getEstado()}">
+						<td th:case="1">Asignado</td>
+						<td th:case="2">Atendiendo</td>
+						<td th:case="3">Finalizado</td>
+						<td th:case="4">Descartado</td>
+					</div>
+					<td th:text="${atencion.cliente.rut}"></td>
+					<td
+						th:text="|${atencion.cliente.nombre}  ${atencion.cliente.apellidoPaterno}  ${atencion.cliente.apellidoMaterno}|">
+					</td>
+					<td th:text="${atencion.cliente.email}"></td>
+					<td th:text="${atencion.tipoAtencion.nombre}"></td>
+					<td
+						th:text="${#temporals.format(atencion.fechaCreacion, 'dd-MM-yyyy HH:mm:ss')}">
+					</td>
+					<td th:text="${atencion.contadorLlamados}"></td>
+					<td th:if="(${atencion.turno.getEstado()} == 1 OR ${atencion.turno.getEstado()} == 2)">
+						<a th:if="${atencion.contadorLlamados} < ${@environment.getProperty('cantidad.maxima.llamadas')}" th:href="@{/atenciones/llamar/{id}(id=${atencion.id})}" class="btn btn-primary btn-sm"> Llamar</a>
+						<a th:href="@{/atenciones/{id}(id=${atencion.id})}"	class="btn btn-danger btn-sm"> Borrar</a>
+						<a th:if="${atencion.turno.getEstado()} != 2" th:href="@{/atenciones/atender/{id}(id=${atencion.id})}"	class="btn btn-secondary btn-sm"> Atender</a>
+						<a th:href="@{/atenciones/finalizar/{id}(id=${atencion.id})}" class="btn btn-success btn-sm"> Finalizar</a>
+					</td>
+					<td th:if="${atencion.turno.getEstado()} == 3"> 
+						<a th:href="@{/atenciones/archivar/{id}(id=${atencion.id})}" class="btn btn-secondary btn-sm"> Archivar</a>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

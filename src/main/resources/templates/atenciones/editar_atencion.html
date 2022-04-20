@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Atenciones</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justifyu-content-center card">
+				<h1 class="text-center">Actualizar Atención</h1>
+				<div class="card-body">
+					<form th:action="@{/atenciones/{id} (id=${atencion.id})}"
+						th:object="${atencion}" method="POST">
+						<div class="form-group">
+							<label>Turnos</label> <select th:field="*{turno}" id="turno"
+								name="turno">
+								<option th:each="turno: ${turnos}" th:value="${turno.id}"
+									th:text="${turno.turnoAtencion}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Cliente</label> <select th:field="*{cliente}" id="cliente"
+								name="cliente">
+								<option th:each="cliente: ${clientes}" th:value="${cliente.id}"
+									th:text="|${cliente.nombre}  ${cliente.apellidoPaterno}  ${cliente.apellidoMaterno}|">
+								</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Tipo atención</label> <select th:field="*{tipoAtencion}"
+								id="tipoAtencion" name="tipoAtencion">
+								<option th:each="tipoAtencion: ${tipoAtenciones}"
+									th:value="${tipoAtencion.id}" th:text="${tipoAtencion.nombre}"></option>
+							</select>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

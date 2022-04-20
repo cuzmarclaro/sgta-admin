@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Clientes</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justifyu-content-center card">
+				<h1 class="text-center">Crear nuevo Cliente</h1>
+				<div class="card-body">
+					<form th:action="@{/clientes}" th:object="${cliente}" method="POST">
+						<div class="form-group">
+							<label>Nombre</label> <input type="text" name="nombre"
+								th:field="*{nombre}" class="form-control"
+								placeholder="Ingresar Nombre" maxlength="50" title="Utilice solo letras" pattern="[A-Za-z]+" required />
+							<div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+								th:errors="*{nombre}"></div>
+						</div>
+						<div class="form-group">
+							<label>Apellido Paterno</label> <input type="text"
+								name="apellidoPaterno" th:field="*{apellidoPaterno}"
+								class="form-control" placeholder="Ingresar Apellido Paterno" maxlength="50" title="Utilice solo letras" pattern="[A-Za-z]+" required />
+							<div class="text-danger"
+								th:if="${#fields.hasErrors('apellidoPaterno')}"
+								th:errors="*{apellidoPaterno}"></div>
+						</div>
+						<div class="form-group">
+							<label>Apellido Materno</label> <input type="text"
+								name="apellidoMaterno" th:field="*{apellidoMaterno}"
+								class="form-control" placeholder="Ingresar Apellido Materno" maxlength="50" title="Utilice solo letras" pattern="[A-Za-z]+" />
+						</div>
+						<div class="form-group">
+							<label>Email</label> <input type="text" name="email"
+								th:field="*{email}" class="form-control"
+								placeholder="Ingresar Email (Debe ingresar un email con formato valido)" minlength="6" maxlength="100" title="El formato correcto es el siguiente:'ejemplo@ejemplo.com' " pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required />
+							<div class="text-danger" th:if="${#fields.hasErrors('email')}"
+								th:errors="*{email}"></div>
+						</div>
+						<div class="form-group">
+							<label>Rut</label> <input type="text" name="rut" id="rut" 
+								th:field="*{rut}" class="form-control" placeholder="Ingresar Rut" minlength="8" maxlength="10" oninput="checkRut(this)" required />
+							<div class="text-danger" th:if="${#fields.hasErrors('rut')}"
+								th:errors="*{rut}"></div>
+						</div>
+						<div class="box-footer">
+							<button type="submit" id="btnSubmit" class="btn btn-primary">Enviar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

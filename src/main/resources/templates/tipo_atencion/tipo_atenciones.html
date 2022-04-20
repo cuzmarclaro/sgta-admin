@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Tipo de Atenciones</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+<div th:replace="fragments/navbar"></div>
+<div class="container">
+	<div class="row">
+		<h1>Lista de Tipo de Atenciones</h1>
+	</div>
+	
+	<div class="row">
+	<div class="col-lg-3">
+		<a th:href="@{/tipo_atencion/nuevo}" class="btn btn-primary btn-sm mb-3">Agregar Tipo de Atencion</a>
+	</div>
+	</div>
+	
+	<table class="table table-striped table-bordered">
+	<thead class="table-dark">
+	<tr> 
+		<th> Nobre</th>
+		<th> Tiempo Atencion</th>
+		<th>Acciones</th>		
+	</tr>
+	</thead>
+	
+	<tbody>
+	<tr th:each="tipo_atencion: ${tipo_atenciones}">
+		<td th:text="${tipo_atencion.nombre}"> </td> 
+		<td th:text="${tipo_atencion.tiempoAtencion}"> </td>
+		<td>
+			<a th:href="@{/tipo_atencion/editar/{id}(id=${tipo_atencion.id})}" 
+			class="btn btn-primary btn-sm">Actualizar </a>
+			 
+			<a th:href="@{/tipo_atencion/{id}(id=${tipo_atencion.id})}" 
+			class="btn btn-danger btn-sm">Borrar </a> 
+		</td>
+	</tr>
+	</tbody>
+	
+	</table>
+	
+</div>
+<div th:replace="fragments/footer"></div>
+</body>
+</html>

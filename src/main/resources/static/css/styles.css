@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+table {
+	font-size: 0.9em;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+	font-size: 0.65em;
+}

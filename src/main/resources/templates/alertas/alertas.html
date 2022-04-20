@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Alertas</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<h1>Lista de Alertas</h1>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/alertas/nuevo}" class="btn btn-primary btn-sm mb-3">Agregar
+					Alerta</a>
+			</div>
+		</div>
+
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Color</th>
+					<th>Color HTML</th>
+					<th>Duraci&oacute;n desde</th>
+					<th>Duraci&oacute;n hasta</th>
+					<th>Descripci&oacute;n</th>
+					<th>Fecha</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="alerta: ${alertas}">
+					<td th:text="${alerta.color}"></td>
+					<td th:text="${alerta.colorHtml}"></td>
+					<td th:text="${alerta.duracionDesde}"></td>
+					<td th:text="${alerta.duracionHasta}"></td>
+					<td th:text="${alerta.descripcion}"></td>
+					<td
+						th:text="${#temporals.format(alerta.fechaCreacion, 'dd-MM-yyyy HH:mm')}">
+					</td>
+					<td><a th:href="@{/alertas/editar/{id}(id=${alerta.id})}"
+						class="btn btn-primary btn-sm">Actualizar </a> <a
+						th:href="@{/alertas/{id}(id=${alerta.id})}"
+						class="btn btn-danger btn-sm">Borrar </a></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

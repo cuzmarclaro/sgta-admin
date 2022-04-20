@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Tipo Atención</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justifyu-content-center card">
+				<h1 class="text-center">Crear nuevo Tipo Atención</h1>
+				<div class="card-body">
+					<form th:action="@{/tipo_atencion}" th:object="${tipoAtencion}"
+						method="POST">
+						<div class="form-group">
+							<label>Nombre</label> <input type="text" name="nombre"
+								th:field="*{nombre}" class="form-control"
+								placeholder="Ingresar Nombre" maxlength="50" required />
+							<div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+								th:errors="*{nombre}"></div>
+						</div>
+						<div class="form-group">
+							<label>Tiempo Atención</label> <input type="number"
+								name="tiempoAtencion" th:field="*{tiempoAtencion}"
+								class="form-control" placeholder="Ingresar Tiempo Atención"  min="1" max="60" required />
+							<div class="text-danger"
+								th:if="${#fields.hasErrors('tiempoAtencion')}"
+								th:errors="*{tiempoAtencion}"></div>
+						</div>
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>

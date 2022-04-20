@@ -1,0 +1,53 @@
+<nav sec:authorize="isAuthenticated()" class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" th:href="@{/}">SGTA</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/clientes}">Clientes</a>
+      </li>
+      <li class="nav-item"  sec:authorize="hasAuthority('ADMIN_ROLE')">
+        <a class="nav-link" th:href="@{/tipo_atencion}">Tipo Atenci&oacute;n</a>
+      </li>
+      <li class="nav-item"  sec:authorize="hasAuthority('ADMIN_ROLE')">
+        <a class="nav-link" th:href="@{/alertas}">Alertas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/atenciones}">Atenciones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/llamadas}">Llamadas</a>
+      </li>
+      <li class="nav-item"  sec:authorize="hasAuthority('ADMIN_ROLE')">
+        <a class="nav-link" th:href="@{/historial}">Historial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/logout}">Salir</a>
+      </li>      
+    </ul>
+  </div>
+</nav>
+
+<nav sec:authorize="isAuthenticated() == false" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#" th:href="@{/}">M&oacute;dulo de
+				registro y login</a>
+		</div>
+	</div>
+</nav>
+
+
+
+<br>
+<br>

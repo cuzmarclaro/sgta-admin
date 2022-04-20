@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org">
+<title>Administrador de Historial</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+<!--/*/ <th:block th:include="fragments/general.html :: headerfiles">
+        </th:block> /*/-->
+</head>
+<body>
+	<div th:replace="fragments/navbar"></div>
+	<div class="container">
+		<div class="row">
+			<h1>Historial de Atenciones</h1>
+		</div>
+	</div>
+	<table class="table table-striped table-bordered">
+		<thead class="table-dark">
+			<tr>
+				<th>Turno</th>
+				<th>Cliente</th>
+				<th>email cliente</th>
+				<th>Tipo atención</th>
+				<th>Fecha atención</th>
+				<th>Fecha llamada</th>
+				<th>Tiempo espera para llamada</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="historial: ${historialAtenciones}">
+				<td th:text="${historial.turnoAtencion}"></td>
+				<td
+					th:text="|${historial.apellidoPaternoCliente} ${historial.apellidoMaternoCliente} ${historial.nombreCliente}|"></td>
+				<td th:text="${historial.emailCliente}"></td>
+				<td th:text="${historial.nombreTipoAtencion}"></td>
+				<td
+					th:text="${#temporals.format(historial.fechaCreacionAtencion, 'dd-MM-yyyy HH:mm:ss')}">
+				</td>
+				<td
+					th:text="${#temporals.format(historial.fechaCreacionLlamada, 'dd-MM-yyyy HH:mm:ss')}">
+				</td>
+				<td
+					th:text="${historial.tiempoEsperaParaLlamada}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>
